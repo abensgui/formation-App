@@ -27,8 +27,7 @@ let initialCount = 0;
 
 BeforeAll(async () => {
   browser = await chromium.launch({
-    headless: false,
-    slowMo: 3000,
+    headless: true,
   });
 });
 
