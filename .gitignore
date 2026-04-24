@@ -15,6 +15,5 @@ build/
 *.swp
 *.swo
 *.egg-info/
-*/package-lock.json
 tests/allure-results/
 tests/allure-report/
