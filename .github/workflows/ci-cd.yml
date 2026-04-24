@@ -54,9 +54,9 @@ jobs:
         working-directory: ${{ env.TEST_DIR }}
         run: npx playwright install --with-deps
 
-      - name: Run Playwright tests
+      - name: Run Cucumber tests
         working-directory: ${{ env.TEST_DIR }}
-        run: npx playwright test
+        run: npx cucumber-js --config cucumber.config.js
 
       - name: Stop Docker Compose
         if: always()
