@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EST Salé — Ajouter une Formation</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">🎓 EST Salé</div>
+      <h1>Ajouter une Formation</h1>
+      <p class="subtitle">Université Mohammed V de Rabat</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="form-container">
+      <a href="{{ url_for('index') }}" class="btn-back">← Retour à la liste</a>
+
+      {% if error %}
+      <div class="alert-error" id="form-error" data-testid="form-error">⚠️ {{ error }}</div>
+      {% endif %}
+
+      <form method="POST" action="{{ url_for('add_formation') }}" id="form-add-formation" class="add-form">
+        <div class="form-group">
+          <label for="titre">Titre de la formation *</label>
+          <input type="text" id="titre" name="titre"
+                 placeholder="Ex: Développement Web Full-Stack"
+                 data-testid="input-titre" required/>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group">
+            <label for="duree">Durée *</label>
+            <input type="text" id="duree" name="duree"
+                   placeholder="Ex: 3 mois"
+                   data-testid="input-duree" required/>
+          </div>
+
+          <div class="form-group">
+            <label for="niveau">Niveau *</label>
+            <select id="niveau" name="niveau" data-testid="input-niveau" required>
+              <option value="">-- Choisir --</option>
+              <option value="Débutant">Débutant</option>
+              <option value="Intermédiaire">Intermédiaire</option>
+              <option value="Avancé">Avancé</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-group">
+          <label for="description">Description *</label>
+          <textarea id="description" name="description" rows="3"
+                    placeholder="Technologies et compétences enseignées..."
+                    data-testid="input-description" required></textarea>
+        </div>
+
+        <div class="form-actions">
+          <button type="submit" class="btn-submit" id="btn-submit" data-testid="btn-submit">
+            ✅ Enregistrer la formation
+          </button>
+          <a href="{{ url_for('index') }}" class="btn-cancel">Annuler</a>
+        </div>
+      </form>
+    </div>
+  </main>
+
+  <footer>
+    <p>Mini-Projet DevOps — Flask · Docker · CI/CD &nbsp;|&nbsp; EST Salé 2025</p>
+  </footer>
+</body>
+</html>

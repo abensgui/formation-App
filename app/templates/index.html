@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>EST Salé — Liste des Formations</title>
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}"/>
+</head>
+<body>
+  <header>
+    <div class="header-inner">
+      <div class="logo">🎓 EST Salé</div>
+      <h1>Catalogue des Formations</h1>
+      <p class="subtitle">Université Mohammed V de Rabat</p>
+    </div>
+  </header>
+
+  <main>
+    <div class="stats">
+      <div class="stat-card">
+        <span class="stat-num" id="formations-count">{{ formations|length }}</span>
+        <span class="stat-label">Formations disponibles</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">3</span>
+        <span class="stat-label">Niveaux</span>
+      </div>
+      <div class="stat-card">
+        <span class="stat-num">100%</span>
+        <span class="stat-label">En ligne</span>
+      </div>
+    </div>
+
+    <div class="actions-bar">
+      <a href="{{ url_for('add_formation') }}" class="btn-add" id="btn-ajouter">
+        ➕ Ajouter une formation
+      </a>
+    </div>
+
+    <section class="formations" id="formations-list">
+      {% for f in formations %}
+      <div class="card" data-id="{{ f.id }}" data-testid="formation-card">
+        <div class="card-header">
+          <h2 data-testid="formation-titre">{{ f.titre }}</h2>
+          <span class="badge badge-{{ f.niveau | lower | replace(' ', '-') }}">
+            {{ f.niveau }}
+          </span>
+        </div>
+        <p class="description" data-testid="formation-description">{{ f.description }}</p>
+        <div class="card-footer">
+          <span class="duree">⏱ {{ f.duree }}</span>
+          <form method="POST" action="{{ url_for('delete_formation', formation_id=f.id) }}"
+                onsubmit="return confirm('Supprimer cette formation ?')">
+            <button type="submit" class="btn-delete" data-testid="btn-supprimer">🗑 Supprimer</button>
+          </form>
+        </div>
+      </div>
+      {% endfor %}
+    </section>
+  </main>
+
+  <footer>
+    <p>Mini-Projet DevOps — Flask · Docker · CI/CD &nbsp;|&nbsp; EST Salé 2025</p>
+  </footer>
+</body>
+</html>
